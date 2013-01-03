@@ -8,8 +8,8 @@ module.exports.Mesh = Mesh
 
 function Mesh(data, scaleFactor, mesher) {
   this.data = data
-  var w = scaleFactor || 10
   var geometry = this.geometry = new THREE.Geometry()
+  this.scale = scaleFactor || new THREE.Vector3(10, 10, 10)
   
   mesher = mesher || voxel.meshers.greedy
   var result = mesher( data.voxels, data.dims )
@@ -20,7 +20,7 @@ function Mesh(data, scaleFactor, mesher) {
 
   for (var i = 0; i < result.vertices.length; ++i) {
     var q = result.vertices[i]
-    geometry.vertices.push(new THREE.Vector3(q[0]*w, q[1]*w, q[2]*w))
+    geometry.vertices.push(new THREE.Vector3(q[0], q[1], q[2]))
   } 
   
   for (var i = 0; i < result.faces.length; ++i) {
@@ -55,6 +55,7 @@ Mesh.prototype.createWireMesh = function(hexColor) {
     wireframe : true
   })
   wireMesh = new THREE.Mesh(this.geometry, wireMaterial)
+  wireMesh.scale = this.scale
   wireMesh.doubleSided = true
   this.wireMesh = wireMesh
   return wireMesh

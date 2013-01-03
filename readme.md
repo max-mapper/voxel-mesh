@@ -31,7 +31,7 @@ threeJSScene.add(mesh)
 
 ## new Mesh(voxelData, scaleFactor, meshingAlgorithm)
 
-`voxelData` is required, `scaleFactor` defaults to `10` and `meshingAlgorithm` defaults to `greedy` (from the [voxel](http://npmjs.org/voxel) module)
+`voxelData` is required, `scaleFactor` defaults to `new Three.Vector3(10, 10, 10)` and `meshingAlgorithm` defaults to `greedy` (from the [voxel](http://npmjs.org/voxel) module)
 
 ## Mesh.prototype.createSurfaceMesh(material)
 

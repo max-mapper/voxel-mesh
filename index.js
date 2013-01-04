@@ -1,4 +1,5 @@
 var voxel = require('voxel')
+var THREE = require('three')
 
 module.exports = function(data, scaleFactor, mesher) {
   return new Mesh(data, scaleFactor, mesher)

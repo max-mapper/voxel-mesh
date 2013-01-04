@@ -10,9 +10,8 @@ generate a three.js mesh from voxel data. extracted from some code by @mikolalys
 
 load [three.js](http://mrdoob.github.com/three.js/) into your page. this library has been tested with version `r54`
 
-use `voxel-mesh-browserified.js`
+it is recommended that you use browserify to use this module
 
-or to build yourself:
 ```
 npm install voxel-mesh
 npm install browserify -g

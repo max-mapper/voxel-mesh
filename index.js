@@ -64,6 +64,7 @@ Mesh.prototype.createWireMesh = function(hexColor) {
 Mesh.prototype.createSurfaceMesh = function(material) {
   material = material || new THREE.MeshNormalMaterial()
   var surfaceMesh  = new THREE.Mesh( this.geometry, material )
+  surfaceMesh.scale = this.scale
   surfaceMesh.doubleSided = false
   this.surfaceMesh = surfaceMesh
   return surfaceMesh

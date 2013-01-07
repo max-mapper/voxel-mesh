@@ -25,11 +25,44 @@ function Mesh(data, scaleFactor, mesher) {
   } 
   
   for (var i = 0; i < result.faces.length; ++i) {
+    var vs = [
+      result.vertices[i*4+0],
+      result.vertices[i*4+1],
+      result.vertices[i*4+2],
+      result.vertices[i*4+3]
+    ]
+    var size = {
+      x: Math.max(
+        Math.abs(vs[0][0] - vs[1][0]),
+        Math.abs(vs[1][0] - vs[2][0])
+      ),
+      y: Math.max(
+        Math.abs(vs[0][1] - vs[1][1]),
+        Math.abs(vs[1][1] - vs[2][1])
+      ),
+      z: Math.max(
+        Math.abs(vs[0][2] - vs[1][2]),
+        Math.abs(vs[1][2] - vs[2][2])
+      )
+    }
+    if (size.x === 0) {
+      var width = size.z
+      var height = size.y
+    }
+    if (size.y === 0) {
+      var width = size.x
+      var height = size.z
+    }
+    if (size.z === 0) {
+      var width = size.x
+      var height = size.y
+    }
+
     geometry.faceVertexUvs[0].push([
       new THREE.Vector2(0, 0),
-      new THREE.Vector2(0, 1),
-      new THREE.Vector2(1, 1),
-      new THREE.Vector2(1, 0)
+      new THREE.Vector2(0, height),
+      new THREE.Vector2(width, height),
+      new THREE.Vector2(width, 0)
     ])
     
     var q = result.faces[i]

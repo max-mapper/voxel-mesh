@@ -25,12 +25,7 @@ function Mesh(data, scaleFactor, mesher) {
   } 
   
   for (var i = 0; i < result.faces.length; ++i) {
-    geometry.faceVertexUvs[0].push([
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0, 1),
-      new THREE.Vector2(1, 1),
-      new THREE.Vector2(1, 0)
-    ])
+    geometry.faceVertexUvs[0].push(this.faceVertexUv(i))
     
     var q = result.faces[i]
     if (q.length === 5) {
@@ -86,5 +81,63 @@ Mesh.prototype.addToScene = function(scene) {
 Mesh.prototype.setPosition = function(x, y, z) {
   if (this.wireMesh) this.wireMesh.position = new THREE.Vector3(x, y, z)
   if (this.surfaceMesh) this.surfaceMesh.position = new THREE.Vector3(x, y, z)
+}
+
+Mesh.prototype.faceVertexUv = function(i) {
+  var vs = [
+    this.meshed.vertices[i*4+0],
+    this.meshed.vertices[i*4+1],
+    this.meshed.vertices[i*4+2],
+    this.meshed.vertices[i*4+3]
+  ]
+  var spans = {
+    x0: vs[0][0] - vs[1][0],
+    x1: vs[1][0] - vs[2][0],
+    y0: vs[0][1] - vs[1][1],
+    y1: vs[1][1] - vs[2][1],
+    z0: vs[0][2] - vs[1][2],
+    z1: vs[1][2] - vs[2][2]
+  }
+  var size = {
+    x: Math.max(Math.abs(spans.x0), Math.abs(spans.x1)),
+    y: Math.max(Math.abs(spans.y0), Math.abs(spans.y1)),
+    z: Math.max(Math.abs(spans.z0), Math.abs(spans.z1))
+  }
+  if (size.x === 0) {
+    if (spans.y0 > spans.y1) {
+      var width = size.y
+      var height = size.z
+    }
+    else {
+      var width = size.z
+      var height = size.y
+    }
+  }
+  if (size.y === 0) {
+    if (spans.x0 > spans.x1) {
+      var width = size.x
+      var height = size.z
+    }
+    else {
+      var width = size.z
+      var height = size.x
+    }
+  }
+  if (size.z === 0) {
+    if (spans.x0 > spans.x1) {
+      var width = size.x
+      var height = size.y
+    }
+    else {
+      var width = size.y
+      var height = size.x
+    }
+  }
+  return [
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0, height),
+    new THREE.Vector2(width, height),
+    new THREE.Vector2(width, 0)
+  ]
 }
 ;

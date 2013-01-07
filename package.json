@@ -1,7 +1,7 @@
 {
   "name": "voxel-mesh",
   "description": "generate a three.js mesh from voxel data",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "voxel": "0.0.3",
-    "three": "0.54.0-dev"
+    "three": "0.54.5-dev"
   },
   "engine": {
     "node": ">=0.6.0"

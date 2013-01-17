@@ -13,7 +13,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "voxel": "0.1.0",
     "three": "0.54.0"
   },
   "engine": {

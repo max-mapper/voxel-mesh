@@ -7,12 +7,11 @@ module.exports = function(data, scaleFactor, mesher) {
 
 module.exports.Mesh = Mesh
 
-function Mesh(data, scaleFactor, mesher) {
+function Mesh(data, mesher, scaleFactor) {
   this.data = data
   var geometry = this.geometry = new THREE.Geometry()
   this.scale = scaleFactor || new THREE.Vector3(10, 10, 10)
   
-  mesher = mesher || voxel.meshers.greedy
   var result = mesher( data.voxels, data.dims )
   this.meshed = result
 

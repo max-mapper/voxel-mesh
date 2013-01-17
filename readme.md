@@ -8,8 +8,6 @@ generate a three.js mesh from voxel data. extracted from some code by @mikolalys
 
 # installation
 
-load [three.js](http://mrdoob.github.com/three.js/) into your page. this library has been tested with version `r54`
-
 it is recommended that you use browserify to use this module
 
 ```
@@ -22,15 +20,15 @@ browserify -r voxel-mesh > voxel-mesh-browserified.js
 
 ```javascript
 var Mesh = require('voxel-mesh')
-var voxelData = require('voxel').generateExamples()['Hilly Terrain']
+var voxelData = require('voxel').generator['Hilly Terrain']
 var mesh = new Mesh(voxelData)
 mesh.createSurfaceMesh()
 threeJSScene.add(mesh)
 ```
 
-## new Mesh(voxelData, scaleFactor, meshingAlgorithm)
+## new Mesh(voxelData, meshingAlgorithm, scaleFactor)
 
-`voxelData` is required, `scaleFactor` defaults to `new Three.Vector3(10, 10, 10)` and `meshingAlgorithm` defaults to `greedy` (from the [voxel](http://npmjs.org/voxel) module)
+`voxelData` and `meshingAlgorithm` are required, `scaleFactor` defaults to `new Three.Vector3(10, 10, 10)`.
 
 ## Mesh.prototype.createSurfaceMesh(material)
 

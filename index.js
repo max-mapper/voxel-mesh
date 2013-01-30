@@ -131,11 +131,20 @@ Mesh.prototype.faceVertexUv = function(i) {
       var height = size.x
     }
   }
-  return [
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, height),
-    new THREE.Vector2(width, height),
-    new THREE.Vector2(width, 0)
-  ]
+  if ((size.z === 0 && spans.x0 < spans.x1) || (size.x === 0 && spans.y0 > spans.y1)) {
+    return [
+      new THREE.Vector2(height, 0),
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(0, width),
+      new THREE.Vector2(height, width)
+    ]
+  } else {
+    return [
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(0, height),
+      new THREE.Vector2(width, height),
+      new THREE.Vector2(width, 0)
+    ]
+  }
 }
 ;

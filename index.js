@@ -1,7 +1,7 @@
 var THREE = require('three')
 
-module.exports = function(data, scaleFactor, mesher) {
-  return new Mesh(data, scaleFactor, mesher)
+module.exports = function(data, mesher, scaleFactor) {
+  return new Mesh(data, mesher, scaleFactor)
 }
 
 module.exports.Mesh = Mesh

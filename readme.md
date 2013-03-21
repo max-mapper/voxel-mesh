@@ -1,51 +1,38 @@
-# voxel-mesh
+# voxel-hello-world
 
-generate a three.js mesh from voxel data. extracted from some code by @mikolalysenko
+Learn more at http://voxeljs.com
 
-- original repo: https://github.com/mikolalysenko/mikolalysenko.github.com/tree/master/MinecraftMeshes2
-- blog post: http://0fps.wordpress.com/2012/07/07/meshing-minecraft-part-2/
-- webgl demo: http://mikolalysenko.github.com/MinecraftMeshes2/
+# Using it as a module
 
-# installation
-
-it is recommended that you use browserify to use this module
-
-```
-npm install voxel-mesh
-npm install browserify -g
-browserify -r voxel-mesh > voxel-mesh-browserified.js
-```
-
-# usage
+`npm install voxel-hello-world`
 
 ```javascript
-var Mesh = require('voxel-mesh')
-var voxelData = require('voxel').generator['Hilly Terrain']
-var mesh = new Mesh(voxelData)
-mesh.createSurfaceMesh()
-threeJSScene.add(mesh)
+var game = require('voxel-hello-world')
 ```
 
-## new Mesh(voxelData, meshingAlgorithm, scaleFactor)
+# Get it running on your machine
 
-`voxelData` and `meshingAlgorithm` are required, `scaleFactor` defaults to `new Three.Vector3(10, 10, 10)`.
+The first time you set up, you should install the required npm packages:
 
-## Mesh.prototype.createSurfaceMesh(material)
+```
+cd voxel-hello-world
+npm install
+```
 
-returns the generated surface mesh. `material` defaults to `new THREE.MeshNormalMaterial()`. after calling this method your mesh will also have `.surfaceMesh` populated with the new mesh
+Then run the start script:
 
-## Mesh.prototype.createWireMesh(hexColor)
+```
+npm start
+```
 
-returns the generated wire mesh. `hexColor` defaults to `0xffffff`. after calling this method your mesh will also have `.wireMesh` populated with the new mesh
+Then point your browser to [http://localhost:8080](http://localhost:8080) and have fun!
 
-## Mesh.prototype.addToScene(scene)
+## How does this work?
 
-convenience method for adding the currently generated meshes (either `surfaceMesh` or `wireMesh`) to a `three.js` scene instance
+voxel.js modules use [browserify](http://browserify.org) for packaging modules together into game bundles. This means that every time you change code in your game you have to build a new bundle in order to test it out. Luckily this is very easy and is automated. When you run the `npm start` script, it runs a local server: when the browser requests `index.js`, it compiles it serverside and then serves up the compiled version.
 
-## Mesh.prototype.setPosition(x, y, z)
+The upshot is, as long as you're running the `npm start` script in the background, you can save your changes to index.js and reload the game to see the new code in action, without having to have a build step in between. (If you'd like to change the start script, it's contained in the `package.json` file in the root directory.)
 
-convenience method for setting the position of the currently generated meshes (either `surfaceMesh` or `wireMesh`)
+## license
 
-# license
-
-MIT
+BSD

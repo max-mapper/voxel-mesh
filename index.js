@@ -73,7 +73,7 @@ Mesh.prototype.createWireMesh = function(hexColor) {
     color : hexColor || 0xffffff,
     wireframe : true
   })
-  wireMesh = new THREE.Mesh(this.geometry, wireMaterial)
+  wireMesh = new this.THREE.Mesh(this.geometry, wireMaterial)
   wireMesh.scale = this.scale
   wireMesh.doubleSided = true
   this.wireMesh = wireMesh

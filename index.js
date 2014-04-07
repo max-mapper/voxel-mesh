@@ -24,17 +24,24 @@ function Mesh(data, mesher, scaleFactor, three, mesherExtraData) {
   } 
   
   for (var i = 0; i < result.faces.length; ++i) {
-    geometry.faceVertexUvs[0].push(this.faceVertexUv(i))
-    
     var q = result.faces[i]
     if (q.length === 5) {
-      var f = new this.THREE.Face4(q[0], q[1], q[2], q[3])
+      var uv = this.faceVertexUv(i)
+
+      var f = new this.THREE.Face3(q[0], q[1], q[3])
       f.color = new this.THREE.Color(q[4])
       geometry.faces.push(f)
+      geometry.faceVertexUvs[0].push([uv[0], uv[1], uv[3]])
+
+      var g = new this.THREE.Face3(q[1], q[2], q[3])
+      g.color = new this.THREE.Color(q[4])
+      geometry.faces.push(g)
+      geometry.faceVertexUvs[0].push([uv[1], uv[2], uv[3]])
     } else if (q.length == 4) {
       var f = new this.THREE.Face3(q[0], q[1], q[2])
       f.color = new this.THREE.Color(q[3])
       geometry.faces.push(f)
+      geometry.faceVertexUvs[0].push(this.faceVertexUv(i))
     }
   }
   
